@@ -39,33 +39,6 @@ class Vulnscanner:
                             pass
                         except Exception as error:
                             print(colored(f"[-] {error}", "red"))
-
-                # elif port == 22: #SSH
-                #     print(colored(f"[!] {hostscan.get_port_service()} detected on host {self.hostIP} port {port}", "yellow"))
-                #     if bool(exploit) == True:
-                #         print(colored("[+] Performing actions..", "green"))
-                #         try:
-                #             pass
-                #         except Exception as error:
-                #             print(colored(f"[-] {error}", "red"))
-
-                # elif port == 23: #TELNET
-                #     print(colored(f"[!] {hostscan.get_port_service()} detected on host {self.hostIP} port {port}", "yellow"))
-                #     if bool(exploit) == True:
-                #         print(colored("[+] Performing actions..", "green"))
-                #         try:
-                #             pass
-                #         except Exception as error:
-                #             print(colored(f"[-] {error}", "red"))
-                            
-                # elif port == 25: #SMTP
-                #     print(colored(f"[!] {hostscan.get_port_service()} detected on host {self.hostIP} port {port}", "yellow"))
-                #     if bool(exploit) == True:
-                #         print(colored("[+] Performing actions..", "green"))
-                #         try:
-                #             pass
-                #         except Exception as error:
-                #             print(colored(f"[-] {error}", "red"))
                         
                 elif port == 80 or port == 443: #HTTP/HTTPS
                     print(colored(f"[!] {hostscan.get_port_service()} detected on host {self.hostIP} port {port}", "yellow"))
@@ -78,25 +51,6 @@ class Vulnscanner:
                                                ).fuzz()
                         except Exception as error:
                             print(colored(f"[-] {error}", "red"))
-                        
-                # elif port == 161: #SNMP
-                #     print(colored(f"[!] {hostscan.get_port_service()} detected on host {self.hostIP} port {port}", "yellow"))
-                #     if bool(exploit) == True:
-                #         print(colored("[+] Performing actions..", "green"))
-                #         try:
-                #             pass
-                #         except Exception as error:
-                #             print(colored(f"[-] {error}", "red"))
-
-                # elif port == 3389: #RDP
-                #     print(colored(f"[!] {hostscan.get_port_service()} detected on host {self.hostIP} port {port}", "yellow"))
-                #     if bool(exploit) == True:
-                #         print(colored("[+] Performing actions..", "green"))
-                #         try:
-                #             pass
-                #         except Exception as error:
-                #             print(colored(f"[-] {error}", "red"))
-                        
         
         
     def execute_command(self, command):
@@ -175,8 +129,8 @@ if __name__ == '__main__':
     hostIP: str = "192.168.148.129/mutillidae"
     hostPort: int = 80
     hostPortRange: int = 80
-    directories: str = "C:/Users/ruhan/PythonProjects/vulnscanner/other/Discovery/DNS/subdomains-top1million-110000.txt"
-    subdomains: str = "C:/Users/ruhan/PythonProjects/vulnscanner/other/Discovery/DNS/subdomains-top1million-110000.txt"
+    directories: str = None
+    subdomains: str = None
 
     #RUNS VULNSCANNER
     try:
