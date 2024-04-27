@@ -123,29 +123,49 @@ class Vulnscanner:
 
 
 if __name__ == '__main__':
+    import argparse
+
     print(colored("[+] Starting console..", "green"))
 
+    # INITIATING ARGUMENTS
+    parser: argparse = argparse.ArgumentParser(description="Vulnerability scanner")
+
+    parser.add_argument("-u", "--hostip", type=str, help="Host ip address")
+    parser.add_argument("-p", "--hostport", type=int, help="Host port address")
+    parser.add_argument("-r", "--hostportrange", type=int, help="Port range")
+    parser.add_argument("-d", "--directories", type=str, help="Wordlist to directories")
+    parser.add_argument("-s", "--subdomains", type=str, help="Wordlist to subdomains")
+
+    args: argparse = parser.parse_args()
+
+    #SET VALUES
+    hostIP: str = args.hostip
+    hostPort: int = args.hostport
+    hostPortRange: int = args.hostportrange
+    directories: str = args.directories
+    subdomains: str = args.subdomains
+
     #DEFAULT VALUES
-    hostIP: str = "192.168.148.129/mutillidae"
-    hostPort: int = 80
-    hostPortRange: int = 80
-    directories: str = None
-    subdomains: str = None
+    if not hostIP:
+        hostIP: str = "192.168.148.129/mutillidae"
+    if not hostPort:
+        hostPort: int = 80
+    if not hostPortRange:
+        hostPortRange: int = 80
+    if not directories:
+        directories: str = "/Discovery/DNS/subdomains-top1million-110000.txt"
+    if not subdomains:
+        subdomains: str = "/Discovery/DNS/subdomains-top1million-110000.txt"
 
     #RUNS VULNSCANNER
     try:
-        Vulnscanner(hostIP=sys.argv[1],
-                    hostPort=sys.argv[2],
-                    hostPortRange=sys.argv[3]
-                    ).scan(exploit=sys.argv[4])
-    except:
-        try:
-            Vulnscanner(hostIP=hostIP,
-                        hostPort=hostPort,
-                        hostPortRange=hostPortRange,
-                        subdomains=subdomains,
-                        directories=directories
-                        ).console()
-        except Exception as error:
-            print(colored(f"[-] {error}..", "red"))
-        print(colored("[-] Console has been stopped..", "red"))
+        Vulnscanner(hostIP=hostIP,
+                    hostPort=hostPort,
+                    hostPortRange=hostPortRange,
+                    subdomains=subdomains,
+                    directories=directories
+                    ).console()
+    except Exception as error:
+        print(colored(f"[-] {error}..", "red"))
+
+    print(colored("[-] Console has been stopped..", "red"))
